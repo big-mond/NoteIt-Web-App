@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content%}
 <br />
 <h1 align="center">{% block header %}Feed{% endblock %}</h1>
-<div align="right">
+<div align="center">
   {% if current_user.id == user.id %}
   <!--Add Note Button-->
   <button
