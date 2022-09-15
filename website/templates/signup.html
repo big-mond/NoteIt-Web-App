@@ -1,51 +1,105 @@
 {% extends "base.html" %} {% block title %}Sign Up{% endblock %} {% block
 content %}
 <br />
+
+<!--Card-->
 <div class="card shadow-sm w-50 mx-auto">
-  <div class="card-header text-center"><h3>Sign Up</h3></div>
-  <form method="POST">
-    <div class="form-group m-3">
-      <label for="email">Email Address</label>
+  
+  <!--Form-->
+  <form class="column p-3" method="POST">
+  
+    <!--Form Title-->
+    <div class="text-center mb-2"><h3>Sign Up</h3></div>
+    
+    <!--Email-->
+    <div class="col-md-11 mx-auto p-2">
+      <label for="email" class="form-label">Email Address</label>
       <input
         type="email"
         class="form-control"
         id="email"
         name="email"
         placeholder="Enter email"
+        required
       />
+
+      <!--Validation Feedback-->
+      <div class="invalid-feedback">
+        Please choose an email address.
+      </div>
     </div>
-    <div class="form-group m-3">
-      <label for="username">Username</label>
-      <input
-        type="text"
-        class="form-control"
-        id="username"
-        name="username"
-        placeholder="Enter username"
-      />
+
+    <!--Username-->
+    <div class="col-md-11 mx-auto p-2">
+      <label for="username" class="form-label">Username</label>
+      <div class="input-group">
+
+        <!--@ Button-->
+        <span 
+          class="input-group-text" 
+          id="inputGroupPrepend">@
+        </span>
+      
+        <!--Input Form-->
+        <input
+          type="text"
+          class="form-control"
+          id="username"
+          name="username"
+          placeholder="Enter username"
+          aria-describedby="inputGroupPrepend"
+          required
+        />
+
+        <!--Validation Feedback-->
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+      </div>
     </div>
-    <div class="form-group m-3">
-      <label for="password1">Password</label>
+    
+    <!--Password-->
+    <div class="col-md-11 mx-auto p-2">
+      <label for="password1" class="form-label">Password</label>
+      
+      <!--Input Form-->
       <input
-        type="text"
+        type="password"
         class="form-control"
         id="password1"
         name="password1"
         placeholder="Enter password"
+        required
       />
+
+      <!--Validation Feedback-->
+      <div class="invalid-feedback">
+        Please choose a password.
+      </div>
     </div>
-    <div class="form-group m-3">
-      <label for="password2">Password (Confirm)</label>
+    
+    <!--Password Confirm-->
+    <div class="col-md-11 mx-auto p-2">
+      <label for="password2" class="form-label">Password (Confirm)</label>
+      
+      <!--Input Form-->
       <input
-        type="text"
+        type="password"
         class="form-control"
         id="password2"
         name="password2"
         placeholder="Confirm password"
+        required
       />
+      
+      <!--Validation Feedback-->
+      <div class="invalid-feedback">
+        Please confirm password.
+      </div>
     </div>
-    <br />
-    <div class="card-footer text-center">
+    
+    <!--Submit Button-->
+    <div class="col-12 text-center mt-3">
       <button type="submit" class="btn btn-primary btn-block">Submit</button>
     </div>
   </form>

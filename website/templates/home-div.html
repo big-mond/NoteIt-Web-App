@@ -1,16 +1,22 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content%}
 <br />
 <h1 align="center">{% block header %}Feed{% endblock %}</h1>
+
+<!--Notes Layout-->
 <div id="notes">
-  <!--Notes Layout-->
   {% for note in notes %}
+  
+  <!--Notes Card-->
   <div class="card w-50 mx-auto">
     
     <!--Notes Card Header-->
     <div class="card-header d-flex justify-content-between align-items-center">
       
       <!--Username Link on Note-->
-      <a class="link-secondary" href="/mypage/{{note.user.username}}">{{note.user.username}}</a>
+      <a 
+        class="link-secondary" 
+        href="/mypage/{{note.user.username}}">{{note.user.username}}
+      </a>
       
       <!--If note author show dropdown to delete-->
       {% if user.id == note.author %}
@@ -62,7 +68,7 @@
         
         <!--View Comments Button-->
         {% if note.comments|length > 0 %}
-        <a data-bs-toggle="collapse" href="#comments-{{note.id}}" role="button">
+        <a class="" data-bs-toggle="collapse" href="#comments-{{note.id}}" role="button">
           <small>View Comments</small>
         </a>
         
@@ -75,17 +81,22 @@
       </div>
       
       <!--View Comments-->
-      <div class="collapse" id="comments-{{note.id}}">
+      <div 
+        class="collapse" id="comments-{{note.id}}">
+        
         <!-- View Comments Card-->
         <div class="card">
           <div class="card" id="comments-expanded-{{note.id}}">
             
             <!--Checks for comments in note-->
             {% for comment in note.comments %}
+            
             <!--Comments Card-->
             <div class="card">
-            <!--Comment Card Header-->
+            
+              <!--Comment Card Header-->
             <div class="card-header d-flex justify-content-between align-items-center">
+             
               <!-- Comment author link to page-->
               <div>
                 <a 
@@ -112,17 +123,21 @@
                   </a>
                 </div>
               </div>
+              {% endif %}
             </div>
-            
-            {% endif %}
 
             <!--Comment text-->
-            <div class="card-body">{{comment.text}}</div>
+            <div 
+              class="card-body">{{comment.text}}
+            </div>
             
             <!--Card footer-->
-            <small class="text-muted p-3"> {{comment.date_created}}</small>
-            </div>
-            {% endfor %}
+            <small 
+              class="text-muted p-3"> {{comment.date_created}}
+            </small>
+            
+          </div>
+          {% endfor %}
           </div>
         </div>
       </div>
@@ -133,6 +148,8 @@
       {{note.date_created}}
     </div>
   </div>
+  </div>
   <br/ > {% endfor %}
 </div>
+
 {% block footer %} {% endblock %} {% endblock %}

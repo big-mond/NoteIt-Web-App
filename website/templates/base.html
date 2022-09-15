@@ -16,8 +16,10 @@
 
   <body>
     <!--Navbar-->
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
+        
+        <!--Navbar Brand-->
         <a class="navbar-brand" href="/">NoteIt</a>  
         
         <!--Navbar Toggler-->      
@@ -27,55 +29,15 @@
           data-bs-toggle="collapse" 
           data-bs-target="#navbar">            
           <span class="navbar-toggler-icon"></span>
-        </button>    
-    
-        <!--Navbar Collapse Settings-->
-        <div class="collapse navbar-collapse" id="navbar">          
-          <div class="navbar-nav navbar-nav-scroll me-auto mb-2 mb-lg-0 ms-3" style="">
-          <!--Checks if user is logged in what to show-->
-          {% if user.is_authenticated %}        
-            
-            <a class="nav-item nav-link" id="home" href="/">Home</a>
-            <a class="nav-item nav-link" id="mypage" href="/mypage/{{user.username}}">My Page</a></li>
-            <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
-            <a class="nav-item nav-link" id="" href="#"></a>
-            <a class="nav-item nav-link" id="" href="#"></a>
-          </div>
-            
-          
-          
-          <div class="me-3" id="navbar">
-          <!--Search bar settings-->
-          <form class="d-flex p-1" method="GET" action="{{url_for('views.search')}}">
-            <input class="form-control me-2 mr-sm-2" type="search" placeholder="Search" aria-label="Search"
-            name="q">
-            <button class="btn btn-outline-secondary" type="submit">Search</button>
-          </form>
-          </div>
-              
-        
-        
-          {% else %}
-          
-          <!--If not logged in show Login and Sign Up-->
-          <div class="collapse navbar-collapse" id="navbar">
-            <div class=" navbar-nav navbar-nav-scroll me-auto mb-2 mb-lg-0 ms-3">          
-              <a class="nav-item nav-link" id="login" href="/login">Login</a>        
-              <a class="nav-item nav-link" id="signUp" href="/signup">
-                <button class="btn btn-sm btn-primary" type="button">Sign Up</button></a>          
-            </div>
-        </div>
-          
-        {% endif%}
-      </div>          
-      
-      <!--Add Note Button-->
+        </button>
+
+         <!--Add Note Button-->
       {% if user.is_authenticated %}
-      
-      <div div="container-fluid ">
+      <div class="" style="justify-content:end">
         <button
+          style=""
           type="button"
-          class="btn btn-secondary mx-auto"
+          class="btn btn-secondary navbar-btn mx-auto"
           data-bs-toggle="modal"
           data-bs-target="#addnotemodal">Add Note
         </button>
@@ -83,12 +45,13 @@
         <!-- Modal -->
         <form method="POST" class="">
           <div
+            style=""
             class="modal fade"
             id="addnotemodal"
             tabindex="-1"
             aria-labelledby="ModalLabel"
             aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog" style="">
               <div class="modal-content">
                 
                 <!--Modal Header-->
@@ -126,7 +89,48 @@
         </form>
       </div>
       {% endif%}
-
+    
+        <!--Navbar Collapse Settings-->
+        <div class="collapse navbar-collapse" id="navbar">          
+          <div class="navbar-nav navbar-nav-scroll me-auto mb-2 mb-lg-0" style="">
+          <!--Checks if user is logged in what to show-->
+          {% if user.is_authenticated %}        
+            
+            <a class="nav-item nav-link" id="home" href="/">Home</a>
+            <a class="nav-item nav-link" id="mypage" href="/mypage/{{user.username}}">My Page</a>
+            <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+            <a class="nav-item nav-link" id="" href="#"></a>
+            <a class="nav-item nav-link" id="" href="#"></a>
+          </div>
+            
+          
+          
+          <div class="me-3" id="navbar">
+          <!--Search bar settings-->
+          <form class="d-flex p-1" method="GET" action="{{url_for('views.search')}}">
+            <input class="form-control me-2 mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+            name="q">
+            <button class="btn btn-outline-secondary" type="submit">Search</button>
+          </form>
+          </div>
+              
+        
+        
+          {% else %}
+          
+          <!--If not logged in show Login and Sign Up-->
+          <div class="collapse navbar-collapse" id="navbar">
+            <div class=" navbar-nav navbar-nav-scroll me-auto mb-2 mb-lg-0">          
+              <a class="nav-item nav-link" id="login" href="/login">Login</a>        
+              <a class="nav-item nav-link" id="signUp" href="/signup">
+                <button class="btn btn-secondary navbar-btn" type="button">Sign Up</button>
+              </a>          
+            </div>
+        </div>
+          
+        {% endif%}
+      
+      </div>          
        
     </nav>
 

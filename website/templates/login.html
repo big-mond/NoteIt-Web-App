@@ -1,11 +1,19 @@
 {% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
 %}
 <br />
+
+<!--Card-->
 <div class="card shadow-sm w-50 mx-auto">
-  <div class="card-header text-center"><h3>Login</h3></div>
-  <form method="POST">
-    <div class="form-group m-3">
-      <label for="email">Email Address</label>
+  
+  <!--Card-->
+  <form class="column p-3" method="POST" novalidate>
+  
+    <!--Form Title-->
+    <div class="text-center mb-3"><h3>Login</h3></div>
+    
+    <!--Email-->
+    <div class="col-md-11 mx-auto form-group p-2">
+      <label for="email" class="form-label">Email Address</label>
       <input
         type="email"
         class="form-control"
@@ -14,7 +22,9 @@
         placeholder="Enter email"
       />
     </div>
-    <div class="form-group m-3">
+    
+    <!--Password-->
+    <div class="col-md-11 mx-auto p-2">
       <label for="password" class="form-label">Password</label>
       <input
         type="password"
@@ -24,18 +34,21 @@
         placeholder="Enter password"
       />
     </div>
-    <div class="form-check mb-2 mr-sm-2 m-3">
+    
+    <!--Remember Me Checkbox-->
+    <div class="col-12 form-check mb-2 mr-sm-2 m-3">
       <label class="form-check-label" for="remember">
         <input
           class="form-check-input"
           value="True"
           type="checkbox"
           id="remember"
-        />
-        Remember me
+        />Remember me
       </label>
     </div>
-    <div class="card-footer text-center">
+    
+    <!--Submit Button-->
+    <div class="col-12 text-center mt-3">
       <button type="submit" class="btn btn-primary btn-block">Login</button>
     </div>
   </form>
