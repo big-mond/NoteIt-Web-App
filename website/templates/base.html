@@ -51,7 +51,11 @@
             tabindex="-1"
             aria-labelledby="ModalLabel"
             aria-hidden="true">
+            
+            <!--Modal Dialog-->
             <div class="modal-dialog" style="">
+              
+              <!--Modal Content-->
               <div class="modal-content">
                 
                 <!--Modal Header-->
@@ -110,7 +114,10 @@
           <form class="d-flex p-1" method="GET" action="{{url_for('views.search')}}">
             <input class="form-control me-2 mr-sm-2" type="search" placeholder="Search" aria-label="Search"
             name="q">
-            <button class="btn btn-outline-secondary" type="submit">Search</button>
+            <div class="input-group-btn">
+              <button class="btn btn-outline-secondary" type="submit">
+                Search
+              </button>
           </form>
           </div>
               
@@ -120,7 +127,7 @@
           
           <!--If not logged in show Login and Sign Up-->
           <div class="collapse navbar-collapse" id="navbar">
-            <div class=" navbar-nav navbar-nav-scroll me-auto mb-2 mb-lg-0">          
+            <div class="navbar-nav navbar-nav-scroll me-auto mb-2 mb-lg-0">          
               <a class="nav-item nav-link" id="login" href="/login">Login</a>        
               <a class="nav-item nav-link" id="signUp" href="/signup">
                 <button class="btn btn-secondary navbar-btn" type="button">Sign Up</button>
