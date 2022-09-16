@@ -9,7 +9,7 @@
   {% for note in notes %}
   
   <!--Notes Card-->
-  <div class="card w-50 mx-auto">
+  <div class="card shadow-sm w-50 mx-auto">
     
     <!--Notes Card Header-->
     <div class="d-flex justify-content-between m-2">
@@ -27,10 +27,11 @@
           class="link-secondary ml-auto" 
           href="/mypage/{{note.user.username}}">{{note.user.username}}
         </a>
-
+        <div>
         <small 
-          class="text-muted"> {{note.date_created}}
+          class="text-muted m-2"> {{note.date_created}}
         </small>
+      </div>
       </div>
       
       <!--If note author show dropdown to delete-->
@@ -60,29 +61,17 @@
       <br />
       <br />
       
-      <!-- Add Comment Form-->
-      <form
-        class="input-group"
-        method="POST"
-        action="/create-comment/{{note.id}}">
-
-        <input
-          type="text"
-          id="text"
-          name="text"
-          class="form-control"
-          placeholder="Add Comment"/>
-        
-          <button 
-          type="submit" class="btn btn-sm btn-secondary">Submit
-        </button>
-      </form>
+      
 
       
+      <div class="d-flex justify-content-center mb-0">
       <!--View Comments Button-->
       {% if note.comments|length > 0 %}
-      
-      <a class="" data-bs-toggle="collapse" href="#comments-{{note.id}}" role="button">
+      <a 
+        class="" 
+        data-bs-toggle="collapse" 
+        href="#comments-{{note.id}}" 
+        role="button">
         <small>View Comments</small>
       </a>
       
@@ -90,15 +79,16 @@
       
       <!--Show Nothing-->
       <small class="text-muted"></small>
-      
       {% endif %}
+    </div>
+      
       
       <!--View Comments Button Settings-->
       <div class="collapse" id="comments-{{note.id}}">
       
         <!-- View Comments Card-->
         <br/>
-        <div class="" id="comments">
+        <div class="" id="">
           <div class="" id="comments-expanded-{{note.id}}">
             
             <!--Checks for comments in note-->
@@ -164,10 +154,45 @@
         </div>
       </div>
     </div>
+
+    <!-- Add Comment Form-->
+    <form
+    class="container-fluid input-group collapse mb-2"
+    id="commentform-{{note.id}}"
+    method="POST"
+    action="/create-comment/{{note.id}}">
+
+    <input
+      type="text"
+      id="text"
+      name="text"
+      class="form-control"
+      placeholder="Add Comment"/>
     
-    <!--Notes Card Footer--> 
+      <button 
+      type="submit" class="btn btn-sm btn-secondary">Submit
+    </button>
+  </form>
+    
+    <!--Notes Card Footer Buttons--> 
     <div 
-      class="justify-content-between text-muted">
+      class="container-fluid shadow-sm btn-group p-0" 
+      style="">
+
+      <!--Like Button-->
+      <a class="btn border-light" type="button">Like</a>
+      
+      <!--Comment Button-->
+      <a 
+        class="btn border-light" 
+        type="button"
+        data-bs-toggle="collapse"
+        href="#commentform-{{note.id}}">Comment
+      </a>
+
+      <!--Share Button-->
+      <a class="btn border-light" type="button">Share</a>
+    
     </div>
   </div>
   <br/ > {% endfor %}
