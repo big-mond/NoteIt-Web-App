@@ -124,11 +124,11 @@ def search():
             flash('Search can not be empty.', category='error')
             return redirect(request.referrer)
     if q :
-        comments = Comment.query.order_by(Comment.created_at.desc()).all()
-        comments = Comment.query.filter(Comment.text.contains(q))
         #Pull notes by date in descending order
         notes = Note.query.order_by(Note.created_at.desc()).all()
         notes = Note.query.filter(Note.text.contains(q))
+        comments = Comment.query.order_by(Comment.created_at.desc()).all()
+        comments = Comment.query.filter(Comment.text.contains(q))
     
     
     

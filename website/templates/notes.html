@@ -19,7 +19,9 @@
         <a 
           class="link-secondary" 
           href="/mypage/{{note.user.username}}">
-          <img class="card-img" src="" alt="img">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+          </svg>
         </a>
 
         <!--Username Link on Note-->
@@ -59,14 +61,14 @@
     <div class="card-body pt-0">
       <div class="card-text">{{note.text}}</div>
       <br />
-      <br />
+    
       
       
 
       
-      <div class="d-flex justify-content-center mb-0">
       <!--View Comments Button-->
       {% if note.comments|length > 0 %}
+      <div class="d-flex justify-content-center mb-0">
       <a 
         class="" 
         data-bs-toggle="collapse" 
@@ -82,13 +84,31 @@
       {% endif %}
     </div>
       
+    <!--Note Buttons--> 
+    <div 
+      class="container-fluid btn-group p-0" 
+      style="">
+
+      <!--Like Button-->
+      <a class="btn border-light" type="button">Like</a>
+
+      <!--Comment Button-->
+      <a 
+        class="btn border-light" 
+        type="button"
+        data-bs-toggle="collapse"
+        href="#commentform-{{note.id}}">Comment
+      </a>
+
+      <!--Share Button-->
+      <a class="btn border-light" type="button">Share</a>
+    </div>
       
-      <!--View Comments Button Settings-->
+    <!--View Comments Button Settings-->
       <div class="collapse" id="comments-{{note.id}}">
       
         <!-- View Comments Card-->
-        <br/>
-        <div class="" id="comments">
+        <div class="p-0" id="comments">
           <div class="" id="comments-expanded-{{note.id}}">
             
             <!--Checks for comments in note-->
@@ -139,7 +159,7 @@
 
             <!--Comment text-->
             <div 
-              class="card-body pt-0" id="comments">{{comment.text}}
+              class="card-body pt-0 mb-1" id="comments">{{comment.text}}
             </div>
           </div>
           
@@ -153,47 +173,30 @@
           </div>
         </div>
       </div>
-    </div>
+    
 
     <!-- Add Comment Form-->
     <form
-    class="container-fluid input-group collapse mb-2"
-    id="commentform-{{note.id}}"
-    method="POST"
-    action="/create-comment/{{note.id}}">
+      class="container-fluid input-group collapse p-0 mb-2"
+      tabindex="-1"
+      id="commentform-{{note.id}}"
+      method="POST"
+      action="/create-comment/{{note.id}}">
 
-    <input
-      type="text"
-      id="text"
-      name="text"
-      class="form-control"
-      placeholder="Add Comment"/>
-    
+      <input
+        type="text"
+        id="text"
+        name="text"
+        class="form-control"
+        placeholder="Add Comment"/>
+
       <button 
-      type="submit" class="btn btn-sm btn-secondary">Submit
-    </button>
-  </form>
+        type="submit" class="btn btn-sm btn-secondary">Submit
+      </button>
+    </form>
+  </div>
     
-    <!--Notes Card Footer Buttons--> 
-    <div 
-      class="container-fluid shadow-sm btn-group p-0" 
-      style="">
-
-      <!--Like Button-->
-      <a class="btn border-light" type="button">Like</a>
-      
-      <!--Comment Button-->
-      <a 
-        class="btn border-light" 
-        type="button"
-        data-bs-toggle="collapse"
-        href="#commentform-{{note.id}}">Comment
-      </a>
-
-      <!--Share Button-->
-      <a class="btn border-light" type="button">Share</a>
-    
-    </div>
+   
   </div>
   <br/ > {% endfor %}
   </div>
