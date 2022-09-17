@@ -16,8 +16,8 @@
 
   <body>
     <!--Navbar-->
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark" style="z-index:2">
-      <div class="container">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+      <div class="container position-relative">
         
         <!--Navbar Brand-->
         <a class="navbar-brand" href="/">NoteIt</a>  
@@ -31,68 +31,6 @@
           <span class="navbar-toggler-icon"></span>
         </button>
 
-         <!--Add Note Button-->
-      {% if user.is_authenticated %}
-      <div class="" style="justify-content:end">
-        <button
-          style="position:relative z-index:1"
-          type="button"
-          class="btn btn-secondary navbar-btn mx-auto"
-          data-bs-toggle="modal"
-          data-bs-target="#addnotemodal">Add Note
-        </button>
-        
-        <!-- Modal -->
-        <form method="POST" class="">
-          <div
-            style=""
-            class="modal fade"
-            id="addnotemodal"
-            tabindex="-1"
-            aria-labelledby="ModalLabel"
-            aria-hidden="true">
-            
-            <!--Modal Dialog-->
-            <div class="modal-dialog" style="">
-              
-              <!--Modal Content-->
-              <div class="modal-content">
-                
-                <!--Modal Header-->
-                <div class="modal-header">
-                  <h5 class="modal-title mx-auto" id="ModalLabel">Add Note</h5>
-                  <!--<button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close">
-                  </button>-->
-                </div>
-                
-                <!--Modal Body-->
-                <div class="modal-body">
-                  <textarea name="text" id="text" placeholder="Enter text" class="form-control"></textarea>
-                </div>
-                
-                <!--Modal Footer-->
-                <div class="modal-footer">
-                  <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-bs-dismiss="modal">Close
-                  </button>
-                  <button 
-                  type="submit" 
-                  class="btn btn-primary">Submit
-                  </button>
-                
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-      {% endif%}
     
         <!--Navbar Collapse Settings-->
         <div class="collapse navbar-collapse" id="navbar">          
@@ -141,10 +79,74 @@
        
     </nav>
 
+       <!--Add Note Button-->
+       {% if user.is_authenticated %}
+       <div class="d-flex position-relative justify-content-end pt-2 pe-4 mx-3" style="">
+         <button
+           style="z-index:1"
+           type="button"
+           class="btn btn btn-secondary position-fixed"
+           data-bs-toggle="modal"
+           data-bs-target="#addnotemodal">Add Note
+         </button>
+         
+         <!-- Modal -->
+         <form method="POST" class="">
+           <div
+             style=""
+             class="modal fade"
+             id="addnotemodal"
+             tabindex="-1"
+             aria-labelledby="ModalLabel"
+             aria-hidden="true">
+             
+             <!--Modal Dialog-->
+             <div class="modal-dialog modal-dialog-centered" style="">
+               
+               <!--Modal Content-->
+               <div class="modal-content">
+                 
+                 <!--Modal Header-->
+                 <div class="modal-header">
+                   <h5 class="modal-title mx-auto" id="ModalLabel">Add Note</h5>
+                   <!--<button
+                     type="button"
+                     class="btn-close"
+                     data-bs-dismiss="modal"
+                     aria-label="Close">
+                   </button>-->
+                 </div>
+                 
+                 <!--Modal Body-->
+                 <div class="modal-body">
+                   <textarea name="text" id="text" placeholder="Enter text" class="form-control"></textarea>
+                 </div>
+                 
+                 <!--Modal Footer-->
+                 <div class="modal-footer">
+                   <button
+                     type="button"
+                     class="btn btn-secondary"
+                     data-bs-dismiss="modal">Close
+                   </button>
+                   <button 
+                   type="submit" 
+                   class="btn btn-primary">Submit
+                   </button>
+                 
+                 </div>
+               </div>
+             </div>
+           </div>
+         </form>
+       </div>
+       {% endif%}    
+
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %} {% for category, message in messages %}
     {% if category == 'error' %}
     
+    <!--Error Alert-->
     <div class="alert alert-danger alert-dismissable fade show" role="alert">
       {{ message }}
       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -152,6 +154,7 @@
     
     {% else %}
     
+    <!--Success Alert-->
     <div class="alert alert-success alert-dismissable fade show" role="alert">
       {{ message }}
       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>

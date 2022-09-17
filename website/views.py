@@ -5,7 +5,6 @@ from . import db
 
 views = Blueprint('views', __name__)
 
-
 #Home
 @views.route("/", methods=['GET', 'POST'])
 @views.route("/home", methods=['GET', 'POST'])
@@ -28,7 +27,7 @@ def home():
             return redirect(request.url)
     
     #Pull notes by date in descending order
-    notes = Note.query.order_by(Note.date_created.desc()).all()
+    notes = Note.query.order_by(Note.created_at.desc()).all()
     
     #Template linked to Home
     return render_template("home.html", user=current_user, notes=notes)
@@ -83,10 +82,10 @@ def mypage(username):
         return redirect(url_for('views.home'))
 
     #Pull notes by date in descending order
-    notes = Note.query.order_by(Note.date_created.desc()).all()
-    
+    notes = Note.query.order_by(Note.created_at.desc()).all()
     #Pull notes by user id
     notes = Note.query.filter_by(author=user.id).all()
+    
     
     #Template linked to mypage
     return render_template("mypage.html", user=current_user, notes=notes, username=username)
@@ -120,17 +119,17 @@ def search():
     #Search function
     q = request.args.get('q')
     
+    
     if len(q) < 1:
             flash('Search can not be empty.', category='error')
             return redirect(request.referrer)
-    if q:
+    if q :
+        comments = Comment.query.order_by(Comment.created_at.desc()).all()
+        comments = Comment.query.filter(Comment.text.contains(q))
         #Pull notes by date in descending order
-        notes = Note.query.order_by(Note.date_created.desc()).all()
+        notes = Note.query.order_by(Note.created_at.desc()).all()
         notes = Note.query.filter(Note.text.contains(q))
     
-    if q:
-        comments = Comment.query.order_by(Comment.date_created.desc()).all()
-        comments = Comment.query.filter(Comment.text.contains(q))
     
     
     #Template for Search Results

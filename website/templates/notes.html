@@ -29,7 +29,7 @@
         </a>
         <div>
         <small 
-          class="text-muted m-2"> {{note.date_created}}
+          class="text-muted m-2"> {{note.created_at|timeago}}
         </small>
       </div>
       </div>
@@ -88,19 +88,19 @@
       
         <!-- View Comments Card-->
         <br/>
-        <div class="" id="">
+        <div class="" id="comments">
           <div class="" id="comments-expanded-{{note.id}}">
             
             <!--Checks for comments in note-->
             {% for comment in note.comments %}
             
             <!--Comments Card-->
-            <div class="card">
+            <div class="card" id="comments">
               <!--Comment Card Header-->
               <div class="d-flex justify-content-between m-2">
                 <div class="card-title">
                   
-                  <!--Notes Card Profile Img-->
+                  <!--Comment Card Profile Img-->
                   <a 
                     class="link-secondary" 
                     href="/mypage/{{comment.user.username}}">
@@ -139,14 +139,14 @@
 
             <!--Comment text-->
             <div 
-              class="card-body pt-0">{{comment.text}}
+              class="card-body pt-0" id="comments">{{comment.text}}
             </div>
           </div>
           
           <!--Card footer-->
           <div class="ms-2 p-0">
             <small 
-              class="text-muted"> {{comment.date_created}}
+              class="text-muted"> {{comment.created_at|timeago}}
             </small>
           </div>
             {% endfor %}
