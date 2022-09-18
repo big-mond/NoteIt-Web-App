@@ -19,14 +19,14 @@
   </head>
 
   <body>
-    <!--Navbar-->
+  <!--Navbar-->
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
       <div class="container position-relative">
         
-        <!--Navbar Brand-->
+      <!--Navbar Brand-->
         <a class="navbar-brand" href="/">NoteIt</a>  
         
-        <!--Navbar Toggler-->      
+      <!--Navbar Toggler-->      
        <button 
           class="navbar-toggler" 
           type="button" 
@@ -36,7 +36,7 @@
         </button>
 
     
-        <!--Navbar Collapse Settings-->
+      <!--Navbar Collapse Settings-->
         <div class="collapse navbar-collapse" id="navbar">          
           <div class="navbar-nav navbar-nav-scroll me-auto mb-2 mb-lg-0" style="">
           <!--Checks if user is logged in what to show-->
@@ -83,18 +83,18 @@
        
     </nav>
 
-       <!--Add Note Button-->
+      <!--Add Note Button-->
        {% if user.is_authenticated %}
-       <div class="d-flex position-relative justify-content-end pt-2 pe-4 mx-3" style="">
+       <div class="d-flex position-fixed align-items-end m-3" style="">
          <button
            style="z-index:1"
            type="button"
-           class="btn btn btn-secondary position-fixed"
+           class="btn btn btn-secondary shadow-1"
            data-bs-toggle="modal"
            data-bs-target="#addnotemodal">Add Note
          </button>
          
-         <!-- Modal -->
+        <!-- Modal -->
          <form method="POST" class="">
            <div
              style=""
@@ -104,13 +104,13 @@
              aria-labelledby="ModalLabel"
              aria-hidden="true">
              
-             <!--Modal Dialog-->
+            <!--Modal Dialog-->
              <div class="modal-dialog modal-dialog-centered" style="">
                
-               <!--Modal Content-->
+              <!--Modal Content-->
                <div class="modal-content">
                  
-                 <!--Modal Header-->
+                <!--Modal Header-->
                  <div class="modal-header">
                    <h5 class="modal-title mx-auto" id="ModalLabel">Add Note</h5>
                    <!--<button
@@ -121,12 +121,12 @@
                    </button>-->
                  </div>
                  
-                 <!--Modal Body-->
+                <!--Modal Body-->
                  <div class="modal-body">
                    <textarea name="text" id="text" placeholder="Enter text" class="form-control"></textarea>
                  </div>
                  
-                 <!--Modal Footer-->
+                <!--Modal Footer-->
                  <div class="modal-footer">
                    <button
                      type="button"
@@ -145,33 +145,70 @@
          </form>
        </div>
        {% endif%}    
-
+  
+  <!--Alert Messages-->
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %} {% for category, message in messages %}
     {% if category == 'error' %}
     
     <!--Error Alert-->
-    <div class="alert alert-danger alert-dismissable fade show" role="alert">
-      {{ message }}
-      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
-    
-    {% else %}
-    
+      <div 
+        class="toast show bg-danger text-white align-items-center 
+          fade m-2 mx-auto" 
+        role="toast" 
+        aria-live="assertive" 
+        aria-atomic="true"
+        data-bs-autohide="true"
+        data-bs-animation="true"
+        data-bs-delay="5000"
+        >
+
+        <div class="d-flex">
+          <div class="toast-body">
+            {{ message }}
+          </div>
+          
+          <button 
+            type="button" 
+            class="btn-close me-2 m-auto" 
+            data-bs-dismiss="toast">
+          </button>
+        </div>
+      </div>
+
+      {% else %}
+
     <!--Success Alert-->
-    <div class="alert alert-success alert-dismissable fade show" role="alert">
-      {{ message }}
-      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
+      <div 
+        class="toast bg-success text-white align-items-center 
+          fade show m-2 mx-auto" 
+        role="alert" 
+        aria-live="assertive" 
+        aria-atomic="true"
+        data-bs-delay="10000"
+        >
+        
+        <div class="d-flex">
+          <div class="toast-body">
+            {{ message }}
+          </div>
+          
+          <button 
+            type="button" 
+            class="btn-close me-2 m-auto" 
+            data-bs-dismiss="toast">
+          </button>
+        </div>
+      </div>
     
     {% endif %} {% endfor %} {% endif %} {% endwith %}
-    
-    <div class="container">{% block content %} {% endblock %}</div>
-    
-    <script 
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
-      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" 
-      crossorigin="anonymous">
-    </script>
+  
+  <div class="container">{% block content %} {% endblock %}</div>
+  
+  <script 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" 
+    crossorigin="anonymous">
+  </script>
   </body>
 </html>

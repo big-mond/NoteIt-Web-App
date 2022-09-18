@@ -9,6 +9,7 @@ import os
 #Environmental Table
 load_dotenv()
 
+#Database
 db = SQLAlchemy()
 DB_NAME = "database.db" 
 
@@ -21,6 +22,7 @@ def create_app():
     app.config['TEMPLATES_AUTO_RELOAD'] = True
     db.init_app(app)
 
+    
     #Template Fiters for date and time
     @app.template_filter('timeago')
     def fromnow(date):
@@ -34,11 +36,13 @@ def create_app():
         minutes = str(value.minute).zfill(2)
         return "{} {} {} {}:{}hs".format(value.day, month, value.year, hour, minutes)
     
+    
     from .views import views
     from .auth import auth
     
     app.register_blueprint(views, url_prefix="/")
     app.register_blueprint(auth, url_prefix="/")
+    
     
     from .models import User, Note
     

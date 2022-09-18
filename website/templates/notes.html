@@ -5,201 +5,199 @@
 <br/>
 
 <!--Notes Layout-->
-<div id="notes">
-  {% for note in notes %}
-  
-  <!--Notes Card-->
-  <div class="card shadow-sm w-50 mx-auto">
+  <div id="notes">
+    {% for note in notes %}
     
+  <!--Notes Card-->
+    <div class="d-flex card shadow-sm col-6 mx-auto mb-3">
+      
     <!--Notes Card Header-->
-    <div class="d-flex justify-content-between m-2">
-      <div class="card-title">
-        
+      <div class="d-flex justify-content-between m-2">
+        <div class="card-title">
+          
         <!--Notes Card Profile Img-->
-        <a 
-          class="link-secondary" 
-          href="/mypage/{{note.user.username}}">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-          </svg>
-        </a>
+          <a 
+            class="link-secondary" 
+            href="/mypage/{{note.user.username}}">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+            </svg>
+          </a>
 
         <!--Username Link on Note-->
-        <a 
-          class="link-secondary ml-auto" 
-          href="/mypage/{{note.user.username}}">{{note.user.username}}
-        </a>
-        <div>
-        <small 
-          class="text-muted m-2"> {{note.created_at|timeago}}
-        </small>
-      </div>
-      </div>
-      
-      <!--If note author show dropdown to delete-->
-      {% if user.id == note.author %}
-      
-      <!--Dropdown Button-->
-      <div class="dropdown">
-        <button
-          type="button"
-          class="btn btn-sm btn-secondary dropdown-toggle"
-          data-bs-toggle="dropdown">
-        </button>
-        
-        <div class="dropdown-menu">
           <a 
-            class="dropdown-item" 
-            href="/delete-note/{{note.id}}">Delete
+            class="link-secondary ml-auto" 
+            href="/mypage/{{note.user.username}}">{{note.user.username}}
           </a>
+          <div>
+          <small 
+            class="text-muted m-2"> {{note.created_at|timeago}}
+          </small>
         </div>
-      </div>
-      {% endif %}
-    </div>
-    
-    <!--Notes Card Body-->
-    <div class="card-body pt-0">
-      <div class="card-text">{{note.text}}</div>
-      <br />
-    
-      
-      
-
-      
-      <!--View Comments Button-->
-      {% if note.comments|length > 0 %}
-      <div class="d-flex justify-content-center mb-0">
-      <a 
-        class="" 
-        data-bs-toggle="collapse" 
-        href="#comments-{{note.id}}" 
-        role="button">
-        <small>View Comments</small>
-      </a>
-      
-      {% else %}
-      
-      <!--Show Nothing-->
-      <small class="text-muted"></small>
-      {% endif %}
-    </div>
-      
-    <!--Note Buttons--> 
-    <div 
-      class="container-fluid btn-group p-0" 
-      style="">
-
-      <!--Like Button-->
-      <a class="btn border-light" type="button">Like</a>
-
-      <!--Comment Button-->
-      <a 
-        class="btn border-light" 
-        type="button"
-        data-bs-toggle="collapse"
-        href="#commentform-{{note.id}}">Comment
-      </a>
-
-      <!--Share Button-->
-      <a class="btn border-light" type="button">Share</a>
-    </div>
-      
-    <!--View Comments Button Settings-->
-      <div class="collapse" id="comments-{{note.id}}">
-      
-        <!-- View Comments Card-->
-        <div class="p-0" id="comments">
-          <div class="" id="comments-expanded-{{note.id}}">
-            
-            <!--Checks for comments in note-->
-            {% for comment in note.comments %}
-            
-            <!--Comments Card-->
-            <div class="card" id="comments">
-              <!--Comment Card Header-->
-              <div class="d-flex justify-content-between m-2">
-                <div class="card-title">
-                  
-                  <!--Comment Card Profile Img-->
-                  <a 
-                    class="link-secondary" 
-                    href="/mypage/{{comment.user.username}}">
-                      <img class="card-img" src="" alt="img">
-                  </a>
-
-                  <!-- Comment Author's link to page-->
-                  <a 
-                    class="link-secondary ml-auto" 
-                    href="/mypage/{{comment.user.username}}">{{comment.user.username}}
-                  </a>
-                </div>
-              
-              
-            <!--If comment author, show delete button-->
-              {% if user.id == comment.author %}
-              
-              <!--Delete Button for Comments-->
-              <div class="dropdown">
-                <button
-                  type="button"
-                  class="btn btn-sm btn-secondary dropdown-toggle"
-                  data-bs-toggle="dropdown">
-                </button>
-                
-                <div class="dropdown-menu">
-                  <a 
-                    href="/delete-comment/{{comment.id}}" 
-                    class="dropdown-item">Delete
-                  </a>
-                </div>
-              </div>
-              {% endif %}
-            </div>
-            
-
-            <!--Comment text-->
-            <div 
-              class="card-body pt-0 mb-1" id="comments">{{comment.text}}
-            </div>
-          </div>
+        </div>
+        
+      <!--If note author show dropdown to delete-->
+        {% if user.id == note.author %}
+        
+      <!--Dropdown Button-->
+        <div class="dropdown">
+          <button
+            type="button"
+            class="btn btn-sm btn-secondary dropdown-toggle"
+            data-bs-toggle="dropdown">
+          </button>
           
-          <!--Card footer-->
-          <div class="ms-2 p-0">
-            <small 
-              class="text-muted"> {{comment.created_at|timeago}}
-            </small>
-          </div>
-            {% endfor %}
+          <div class="dropdown-menu">
+            <a 
+              class="dropdown-item" 
+              href="/delete-note/{{note.id}}">Delete
+            </a>
           </div>
         </div>
+        {% endif %}
+      </div>
+      
+    <!--Notes Card Body-->
+      <div class="card-body pt-0">
+
+      <!--Notes Card Text-->
+        <div class="card-text mb-2">{{note.text}}</div>
+        
+      <!--View Comments Button-->
+        {% if note.comments|length > 0 %}
+        <div class="d-flex justify-content-center mb-0">
+          <a 
+            class="" 
+            data-bs-toggle="collapse" 
+            href="#comments-{{note.id}}" 
+            role="button">
+            <small>View Comments</small>
+          </a>
+
+          {% else %}
+
+          <!--Show Nothing-->
+          <small class="text-muted"></small>
+          {% endif %}
+        </div>
+        
+      <!--Like/Comment/Share Buttons--> 
+        <div 
+          class="container-fluid col-12 btn-group p-0" 
+          style="">
+
+        <!--Like Button-->
+          <a class="btn border-light" type="button">Like</a>
+
+        <!--Comment Button-->
+          <a 
+            class="btn border-light" 
+            type="button"
+            data-bs-toggle="collapse"
+            href="#commentform-{{note.id}}">Comment
+          </a>
+
+        <!--Share Button-->
+          <a class="btn border-light" type="button">Share</a>
+        </div>
+        
+      <!--View Comments Collapse Settings-->
+        <div class="collapse" id="comments-{{note.id}}">
+        
+      <!-- View Comments Card-->
+      
+        <div class="" id="comments-expanded-{{note.id}}">
+          
+        <!--Checks for comments in note-->
+          {% for comment in note.comments %}
+          
+        <!--Comments Card-->
+          <div class="card" id="">
+          <!--Comment Card Header-->
+            <div class="d-flex justify-content-between m-2">
+              <div class="card-title">
+                
+              <!--Comment Card Profile Img-->
+                <a 
+                  class="link-secondary" 
+                  href="/mypage/{{comment.user.username}}">
+                    <img class="card-img" src="" alt="img">
+                </a>
+
+              <!-- Comment Author's link to page-->
+                <a 
+                  class="link-secondary ml-auto" 
+                  href="/mypage/{{comment.user.username}}">{{comment.user.username}}
+                </a>
+              </div>
+            
+            
+              <!--If comment author, show delete button-->
+                {% if user.id == comment.author %}
+
+              <!--Delete Button for Comments-->
+                <div class="dropdown">
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-secondary dropdown-toggle"
+                    data-bs-toggle="dropdown">
+                  </button>
+
+                  <div class="dropdown-menu">
+                    <a 
+                      href="/delete-comment/{{comment.id}}" 
+                      class="dropdown-item">Delete
+                    </a>
+                  </div>
+                </div>
+                {% endif %}
+            </div>
+
+          <!--Comment Card Body-->
+            <div 
+              class="card-body mb-1" 
+              id="">{{comment.text}}
+            </div>
+          </div>
+        
+          <!--Comment Card footer-->
+            <div class="">
+              <small 
+                class="text-muted"> {{comment.created_at|timeago}}
+              </small>
+            </div>
+          {% endfor %}
+        </div>
+      
+      </div>
+          
+          <!-- Add Comment Form-->
+            <form
+              class="container-fluid input-group collapse p-2  m-0"
+              tabindex="-1"
+              id="commentform-{{note.id}}"
+              method="POST"
+              action="/create-comment/{{note.id}}">
+    
+              <input
+                type="text"
+                id="text"
+                name="text"
+                class="form-control"
+                placeholder="Add Comment"/>
+    
+              <button 
+                type="submit" class="btn btn-sm btn-secondary">Submit
+              </button>
+            </form>
       </div>
     
 
-    <!-- Add Comment Form-->
-    <form
-      class="container-fluid input-group collapse p-0 mb-2"
-      tabindex="-1"
-      id="commentform-{{note.id}}"
-      method="POST"
-      action="/create-comment/{{note.id}}">
-
-      <input
-        type="text"
-        id="text"
-        name="text"
-        class="form-control"
-        placeholder="Add Comment"/>
-
-      <button 
-        type="submit" class="btn btn-sm btn-secondary">Submit
-      </button>
-    </form>
-  </div>
+      
     
-   
+    </div>
+    {% endfor %}
+    </div>
   </div>
-  <br/ > {% endfor %}
-  </div>
-</div>
 
 {% block footer %} {% endblock %} {% endblock %}

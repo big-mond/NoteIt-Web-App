@@ -80,10 +80,10 @@ def mypage(username):
     if not user:
         flash('No user with that username exists.', category='error')
         return redirect(url_for('views.home'))
-
-    #Pull notes by date in descending order
+    
+    #Order notes by date in descending order
+    #Filter notes by user id
     notes = Note.query.order_by(Note.created_at.desc()).all()
-    #Pull notes by user id
     notes = Note.query.filter_by(author=user.id).all()
     
     
@@ -133,7 +133,7 @@ def search():
     
     
     #Template for Search Results
-    return render_template("search.html", user=current_user, notes=notes, comments=comments)
+    return render_template("search.html", user=current_user, comments=comments)
 
 
 #Create Comment
