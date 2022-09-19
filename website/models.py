@@ -18,10 +18,11 @@ class User(db.Model, UserMixin):
 class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     text = db.Column(db.Text, nullable=False)
+    #date_created = db.Column(db.DateTime(timezone=True), default=func.now())
     created_at = db.Column(db.DateTime(timezone=True), server_default=func.now(), default=datetime.datetime.now)
     updated_at = db.Column(db.DateTime(timezone=True), server_default=func.now(), default=datetime.datetime.now, onupdate=datetime.datetime.now)
     author = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"), nullable=False)
-    comments = db.relationship('Comment', backref='post', passive_deletes=True)
+    comments = db.relationship('Comment', backref='note', passive_deletes=True)
     
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)

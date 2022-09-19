@@ -4,10 +4,10 @@
 <br />
 
 <!--Card-->
-<div class="card shadow-sm w-50 mx-auto">
+<div class="card d-flex shadow-sm col-5 mx-auto">
   
   <!--Card-->
-  <form class="column p-3" method="POST" novalidate>
+  <form class="column p-3" method="POST">
   
     <!--Form Title-->
     <div class="text-center mb-3"><h3>Login</h3></div>
@@ -16,12 +16,18 @@
     <div class="col-md-11 mx-auto form-group p-2">
       <label for="email" class="form-label">Email Address</label>
       <input
-        type="email"
+        type="text"
         class="form-control"
         id="email"
         name="email"
         placeholder="Enter email"
+        required
       />
+
+      <!--Validation Feedback-->
+      <div class="invalid-feedback">
+        Please enter your email address.
+      </div>
     </div>
     
     <!--Password-->
@@ -33,7 +39,13 @@
         id="password"
         name="password"
         placeholder="Enter password"
+        required
       />
+
+      <!--Validation Feedback-->
+      <div class="invalid-feedback">
+        Please enter your password.
+      </div>
     </div>
     
     <!--Remember Me Checkbox-->
@@ -49,8 +61,8 @@
     </div>
     
     <!--Submit Button-->
-    <div class="col-12 text-center mt-3">
-      <button type="submit" class="btn btn-primary btn-block">Login</button>
+    <div class="d-grid text-center mt-3">
+      <button type="submit" class="btn btn-primary">Login</button>
     </div>
   </form>
 </div>

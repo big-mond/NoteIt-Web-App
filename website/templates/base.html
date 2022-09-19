@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!--Bootstrap-->
+  <!--Bootstrap-->
     <link 
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" 
       rel="stylesheet" 
       integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" 
       crossorigin="anonymous">
-    <!--Bootstrao Icons-->
+  <!--Bootstrap Icons-->
     <link 
       rel="stylesheet" 
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
@@ -38,58 +38,75 @@
     
       <!--Navbar Collapse Settings-->
         <div class="collapse navbar-collapse" id="navbar">          
-          <div class="navbar-nav navbar-nav-scroll me-auto mb-2 mb-lg-0" style="">
-          <!--Checks if user is logged in what to show-->
+          <ul class="navbar-nav navbar-nav-scroll me-auto mb-2 mb-lg-0" style="">
+        <!--Checks if user is logged in what to show-->
           {% if user.is_authenticated %}        
             
-            <a class="nav-item nav-link" id="home" href="/">Home</a>
-            <a class="nav-item nav-link" id="mypage" href="/mypage/{{user.username}}">My Page</a>
-            <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
-            <a class="nav-item nav-link" id="" href="#"></a>
-            <a class="nav-item nav-link" id="" href="#"></a>
-          </div>
+          <!--Navbar Links-->
+          <!--Home-->
+            <li><a class="nav-item nav-link" id="home" href="/">Home</a></li>
+          <!--My Page-->
+            <li><a class="nav-item nav-link" id="mypage" href="/mypage/{{user.username}}">My Page</a></li>
+          <!--Logout-->
+            <li><a class="nav-item nav-link" id="logout" href="/logout">Logout</a></li>
+            <li><a class="nav-item nav-link" id="" href="#"></a></li>
+            <li><a class="nav-item nav-link" id="" href="#"></a></li>
+            <li><a class="nav-item nav-link" id="" href="#"></a></li>
+          </ul>
             
           
           
+        <!--Search bar settings-->
           <div class="me-3" id="navbar">
-          <!--Search bar settings-->
-          <form class="d-flex p-1" method="GET" action="{{url_for('views.search')}}">
-            <input class="form-control me-2 mr-sm-2" type="search" placeholder="Search" aria-label="Search"
-            name="q">
-            <div class="input-group-btn">
-              <button class="btn btn-outline-secondary" type="submit">
-                Search
-              </button>
-          </form>
+            <form class="d-flex p-1" method="GET" action="{{url_for('views.search')}}">
+            
+            <!--Input Form-->  
+              <input 
+                class="form-control me-2 mr-sm-2" 
+                type="search" 
+                placeholder="Search" 
+                aria-label="Search"
+                name="q">
+
+            <!--Search Button-->
+              <div class="input-group-btn">
+                <button class="btn btn-outline-secondary" type="submit">
+                  Search
+                </button>
+              </div>
+            </form>
           </div>
               
         
         
           {% else %}
           
-          <!--If not logged in show Login and Sign Up-->
+        <!--If not logged in show Login and Sign Up links-->
           <div class="collapse navbar-collapse" id="navbar">
-            <div class="navbar-nav navbar-nav-scroll me-auto mb-2 mb-lg-0">          
-              <a class="nav-item nav-link" id="login" href="/login">Login</a>        
-              <a class="nav-item nav-link" id="signUp" href="/signup">
-                <button class="btn btn-secondary navbar-btn" type="button">Sign Up</button>
-              </a>          
-            </div>
+            <ul class="navbar-nav navbar-nav-scroll me-auto mb-2 mb-lg-0">
+            <!--Login-->          
+              <li><a class="nav-item nav-link" id="login" href="/login">Login</a></li>
+            <!--Signup-->       
+              <li><a class="nav-item nav-link" id="signUp" href="/signup">
+              <!--Signup Button-->
+                <button class="btn btn-sm btn-secondary navbar-btn" type="button">Sign Up</button></a>
+              </li>          
+            </ul>
         </div>
-          
         {% endif%}
-      
       </div>          
-       
     </nav>
 
       <!--Add Note Button-->
        {% if user.is_authenticated %}
-       <div class="d-flex position-fixed align-items-end m-3" style="">
+       
+       <div class="d-flex position-relative justify-content-end 
+          pt-2 pe-4 mx-3 col-11">
+        <!--Button-->
          <button
            style="z-index:1"
            type="button"
-           class="btn btn btn-secondary shadow-1"
+           class="btn btn btn-secondary position-fixed"
            data-bs-toggle="modal"
            data-bs-target="#addnotemodal">Add Note
          </button>
@@ -146,17 +163,19 @@
        </div>
        {% endif%}    
   
+ 
   <!--Alert Messages-->
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %} {% for category, message in messages %}
-    {% if category == 'error' %}
-    
+  
     <!--Error Alert-->
+      {% if category == 'error' %}
+      
       <div 
-        class="toast show bg-danger text-white align-items-center 
-          fade m-2 mx-auto" 
-        role="toast" 
-        aria-live="assertive" 
+        class="alert fade show alert-danger align-items-center 
+          m-2 mx-auto col-5" 
+        role="alert" 
+        aria-live="assertive"
         aria-atomic="true"
         data-bs-autohide="true"
         data-bs-animation="true"
@@ -164,14 +183,16 @@
         >
 
         <div class="d-flex">
-          <div class="toast-body">
+        <!--Message-->
+          <div class="">
             {{ message }}
           </div>
           
+        <!--Button-->
           <button 
             type="button" 
-            class="btn-close me-2 m-auto" 
-            data-bs-dismiss="toast">
+            class="btn-close btn-close-red me-2 m-auto" 
+            data-bs-dismiss="alert">
           </button>
         </div>
       </div>
@@ -180,35 +201,40 @@
 
     <!--Success Alert-->
       <div 
-        class="toast bg-success text-white align-items-center 
-          fade show m-2 mx-auto" 
+        class="alert show alert-success align-items-center 
+          m-2 mx-auto col-5" 
         role="alert" 
-        aria-live="assertive" 
+        aria-live="assertive"
         aria-atomic="true"
-        data-bs-delay="10000"
+        data-bs-autohide="true"
+        data-bs-animation="true"
+        data-bs-delay="5000"
         >
         
         <div class="d-flex">
-          <div class="toast-body">
+        <!--Message-->
+          <div class="">
             {{ message }}
           </div>
           
+        <!--Button-->
           <button 
             type="button" 
             class="btn-close me-2 m-auto" 
-            data-bs-dismiss="toast">
+            data-bs-dismiss="alert">
           </button>
         </div>
       </div>
     
     {% endif %} {% endfor %} {% endif %} {% endwith %}
   
-  <div class="container">{% block content %} {% endblock %}</div>
+  {% block content %} {% endblock %}
   
-  <script 
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" 
-    crossorigin="anonymous">
-  </script>
+  <!--Bootstrap Script-->
+    <script 
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" 
+      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" 
+      crossorigin="anonymous">
+    </script>
   </body>
 </html>
