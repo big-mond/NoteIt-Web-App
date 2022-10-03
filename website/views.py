@@ -149,6 +149,29 @@ def delete_note(id):
 @login_required
 def search():
     
+    #Add Note Function on Search Page
+    if request.method == 'POST':
+        
+        #Pulls text from form
+        text = request.form.get('text')
+        
+        #If length of text less than one, flash error message
+        if len(text) < 1:
+            flash('Note is too short!', category='error')
+        
+        #If no text in text area, flash error message
+        elif not text:
+            flash('Note cannot be empty', category='error')
+        
+        #If checks pass, add note to database with success message
+        else:
+            note = Note(text=text, author=current_user.id)
+            db.session.add(note)
+            db.session.commit()
+            flash('Note created!', category='success')
+            #Redirect to page that made POST request
+            return redirect(request.url)
+    
     #Search function
     q = request.args.get('q')
     
@@ -161,15 +184,15 @@ def search():
     #Pull notes and comments by date in descending order
     if q :
         notes = Note.query.filter(Note.text.contains(q)).order_by(Note.created_at.desc())
-        username = Note.query.filter(Note.author.contains(q)).order_by(Note.created_at.desc())
+        author = Note.query.filter(Note.author.contains(q)).order_by(Note.created_at.desc())
         comments = Comment.query.filter(Comment.text.contains(q)).order_by(Comment.created_at.desc())
         
     
-    #if q not found:
-    #flash('No Results Found.', category='error')
+    else:
+        print('No Results Found.', category='error')
     
     #Template for Search Results
-    return render_template("search.html", user=current_user, notes=notes, comments=comments, username=username)
+    return render_template("search.html", user=current_user, notes=notes, comments=comments, author=author)
 
 
 #Create Comment
