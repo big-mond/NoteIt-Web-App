@@ -111,11 +111,9 @@ def mypage(username):
         flash('No user with that username exists.', category='error')
         return redirect(url_for('views.home'))
     
-    #Order notes by date in descending order
-    notes = Note.query.order_by(Note.created_at.desc()).all()
     
-    #Filter notes by user id
-    notes = Note.query.filter_by(author=user.id).all()
+    #Filter notes by user id and order by date in descending order
+    notes = Note.query.filter_by(author=user.id).order_by(Note.created_at.desc())
     
     
     #Template linked to mypage
@@ -162,17 +160,16 @@ def search():
     
     #Pull notes and comments by date in descending order
     if q :
-        #notes = Note.query.order_by(Note.created_at.desc()).all()
-        notes = Note.query.filter(Note.text.contains(q))
+        notes = Note.query.filter(Note.text.contains(q)).order_by(Note.created_at.desc())
+        username = Note.query.filter(Note.author.contains(q)).order_by(Note.created_at.desc())
+        comments = Comment.query.filter(Comment.text.contains(q)).order_by(Comment.created_at.desc())
+        
     
-        #comments = Comment.query.order_by(Comment.created_at.desc()).all()
-        comments = Comment.query.filter(Comment.text.contains(q))
-    
-    #if q:
+    #if q not found:
     #flash('No Results Found.', category='error')
     
     #Template for Search Results
-    return render_template("search.html", user=current_user, notes=notes, comments=comments)
+    return render_template("search.html", user=current_user, notes=notes, comments=comments, username=username)
 
 
 #Create Comment

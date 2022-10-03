@@ -4,13 +4,13 @@
 <br />
 
 <!--Card-->
-<div class="card d-flex shadow-sm col-5 mx-auto">
+<div class="card d-flex shadow-sm col-lg-4 col-md-4 col-sm-5 col-6 mx-auto">
   
   <!--Form-->
   <form class="column p-3" method="POST">
   
     <!--Form Title-->
-    <div class="text-center mb-2"><h3>Sign Up</h3></div>
+    <div class="form-title text-center mb-2"><h3>Sign Up</h3></div>
     
     <!--Email-->
     <div class="col-md-11 mx-auto p-2">
@@ -73,6 +73,12 @@
         required
       />
 
+      <div class="">
+        <span class="form-text">
+          Must be 7-20 characters long. 
+        </span>
+      </div>
+
       <!--Validation Feedback-->
       <div class="invalid-feedback">
         Please choose a password.
@@ -100,8 +106,8 @@
     </div>
     
     <!--Submit Button-->
-    <div class="col-12 text-center mt-3">
-      <button type="submit" class="btn btn-primary btn-block">Submit</button>
+    <div class="d-grid text-center mt-3">
+      <button type="submit" class="btn btn-primary btn-block">Register</button>
     </div>
   </form>
 </div>

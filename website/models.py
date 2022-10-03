@@ -9,6 +9,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(150), unique=True)
     password = db.Column(db.String(150))
     first_name = db.Column(db.String(150))
+    #date_created = db.Column(db.DateTime(timezone=True), server_default=func.now(), default=func.now())
     created_at = db.Column(db.DateTime(timezone=True), server_default=func.now(), default=datetime.datetime.now)
     updated_at = db.Column(db.DateTime(timezone=True), server_default=func.now(), default=datetime.datetime.now, onupdate=datetime.datetime.now)
     notes = db.relationship('Note', backref='user', passive_deletes=True)
@@ -18,7 +19,7 @@ class User(db.Model, UserMixin):
 class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     text = db.Column(db.Text, nullable=False)
-    #date_created = db.Column(db.DateTime(timezone=True), default=func.now())
+    #date_created = db.Column(db.DateTime(timezone=True), server_default=func.now(), default=func.now())
     created_at = db.Column(db.DateTime(timezone=True), server_default=func.now(), default=datetime.datetime.now)
     updated_at = db.Column(db.DateTime(timezone=True), server_default=func.now(), default=datetime.datetime.now, onupdate=datetime.datetime.now)
     author = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"), nullable=False)
@@ -27,6 +28,7 @@ class Note(db.Model):
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     text = db.Column(db.String(200), nullable=False)
+    #date_created = db.Column(db.DateTime(timezone=True), server_default=func.now(), default=func.now())
     created_at = db.Column(db.DateTime(timezone=True), server_default=func.now(), default=datetime.datetime.now)
     updated_at = db.Column(db.DateTime(timezone=True), server_default=func.now(), default=datetime.datetime.now, onupdate=datetime.datetime.now)
     author = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"), nullable=False)
